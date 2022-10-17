@@ -1,0 +1,25 @@
+<game name="stringhe">
+    <test>
+        <input name="input_01">
+            8
+            AABBCC
+            ABABAC
+            AAABBD
+            AABBBB
+            ABBABC
+            DCBDAB
+            ADDBBA
+            AABAAB
+        </input>
+        <output name="output_01">
+            B
+            B
+            C
+            C
+            C
+            B
+            B
+            B
+        </output>
+    </test>
+</game>
