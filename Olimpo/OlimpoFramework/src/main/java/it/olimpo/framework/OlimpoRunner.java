@@ -1,14 +1,13 @@
 package it.olimpo.framework;
 
 import java.io.File;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class OlimpoRunner {
 
     private String runnerName;
+    private File xmlInput;
     private boolean result;
+    private Object singleReturn;
 
     public OlimpoRunner (String type) {
         runnerName = type;
@@ -18,32 +17,38 @@ public abstract class OlimpoRunner {
         //
     }
 
-    public void setRunnerName (String runnerName) {
-        this.runnerName = runnerName;
+    public Object getSingleReturn() {
+        return singleReturn;
     }
 
-    public static Object getRunningInstance (String runningName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        File fClaz = FileUtils.searchFile(runningName + ".java");
-        assert fClaz != null;
-        String relative = fClaz.getPath().substring(fClaz.getPath().indexOf("it/"))
-                                .replace("/", ".")
-                                .substring(0, fClaz.getPath().substring(fClaz.getPath().indexOf("it/"))
-                                                                .replace("/", ".").length()-5 );
+    public boolean getResult () {
+        return this.result;
+    }
+    public String getRunnerName () {
+        return this.runnerName;
+    }
 
+    public static Object getRunningInstance (String runningName, File fXml) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        File fClaz = FileUtils.searchFile(runningName, FileUtils.JAVA_FORMAT);
+        assert fClaz != null;
+        String relative = FileUtils.getRelativePath(fClaz);
         Object z = Class.forName(relative).newInstance();
-        ((OlimpoRunner) z).setRunnerName(runningName);
+        ((OlimpoRunner) z).runnerName = runningName;
+        ((OlimpoRunner) z).xmlInput = fXml;
         return z;
     }
 
     public void run () {
         boolean totalResult = true;
-        for (TestResult tr : FileUtils.parseXml(runnerName)) {
+        for (TestResult tr : FileUtils.parseXml(xmlInput)) {
             tr.setGenOutput(start(tr.getInput()));
             totalResult &= tr.evaluate();
+            if (!tr.getExpectedOutput().hasExpected()) {
+                this.singleReturn = tr.getGenOutput().get(0);
+            }
         }
         this.result = totalResult;
     }
 
     public abstract SimpleFile start( SimpleFile fIn );
-
 }

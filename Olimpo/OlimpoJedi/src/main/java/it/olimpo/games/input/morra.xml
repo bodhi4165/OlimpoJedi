@@ -1,6 +1,7 @@
-<game name="morra">
+<game name="morra" has_expected="Y" class="Morra">
     <test>
         <input name="input_01">
+            <value>
             20
             12196 24515
             21377 25893
@@ -22,9 +23,10 @@
             10481 27832
             1244 28214
             14875 10028
+            </value>
         </input>
         <output name="output_01">
-            2122222112X12122222X
+            <value>2122222112X12122222X</value>
         </output>
     </test>
 </game>

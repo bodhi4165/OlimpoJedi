@@ -1,6 +1,7 @@
-<game name="stringhe">
+<game name="stringhe" has_expected="Y" class="Stringhe">
     <test>
         <input name="input_01">
+            <value>
             8
             AABBCC
             ABABAC
@@ -10,8 +11,10 @@
             DCBDAB
             ADDBBA
             AABAAB
+            </value>
         </input>
         <output name="output_01">
+            <value>
             B
             B
             C
@@ -20,6 +23,7 @@
             B
             B
             B
+            </value>
         </output>
     </test>
 </game>

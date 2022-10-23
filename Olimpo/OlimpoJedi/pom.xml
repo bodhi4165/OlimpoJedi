@@ -34,7 +34,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                it.olimpo.OlimpoStarter
+                                it.olimpo.OlimpoJedi
                             </mainClass>
                         </manifest>
                     </archive>

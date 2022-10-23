@@ -5,6 +5,11 @@ public class TestResult {
     private SimpleFile expectedOutput;
     private SimpleFile genOutput;
 
+    public TestResult (SimpleFile input, SimpleFile expectedOutput) {
+        this.input = input;
+        this.expectedOutput = expectedOutput;
+    }
+
     public SimpleFile getInput() {
         return input;
     }
@@ -30,6 +35,10 @@ public class TestResult {
     }
 
     public boolean evaluate () {
+        if (!expectedOutput.hasExpected()) {
+            return true;
+        }
+
         if (genOutput.size() != expectedOutput.size()) {
             return false;
         }

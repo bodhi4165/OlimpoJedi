@@ -59,10 +59,8 @@ public class Morra extends OlimpoRunner  {
     }
 
     private String fillNumberByOther (String number, String other) {
-        while (number.length() != other.length()) {
-            if (other.length() > number.length()) {
-                number+="0";
-            }
+        while (number.length() < other.length()) {
+            number+="0";
         }
         return number;
     }
