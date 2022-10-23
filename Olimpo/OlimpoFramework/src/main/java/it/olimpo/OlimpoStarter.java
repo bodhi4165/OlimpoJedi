@@ -35,7 +35,7 @@ public class OlimpoStarter {
                 if (canPrint) print(t.getRunnerName(), "" + t.getResult());
                 if (canPrint && t.getSingleReturn() != null) print(t.getRunnerName(), (String) t.getSingleReturn());
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-                ex.printStackTrace();
+                if (canPrint) print (sIn, ex.getMessage());
             }
         }
     }
